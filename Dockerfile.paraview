@@ -1,0 +1,13 @@
+ARG BASE
+FROM ${BASE}
+
+# copy scripts
+COPY scripts/install_paraview.sh /opt/scripts/install_paraview.sh
+
+# install paraview
+ARG PARAVIEW_VERSION="5.11.0"
+ARG GL_VARIANT="osmesa"
+
+RUN /opt/scripts/install_paraview.sh
+WORKDIR /opt/paraview
+CMD [ "/opt/paraview/bin/pvserver", "--version" ]
